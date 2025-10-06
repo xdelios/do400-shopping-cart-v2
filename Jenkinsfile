@@ -5,15 +5,15 @@ pipeline {
         booleanParam(name: "RUN_INTEGRATION_TESTS", defaultValue: true)
     }
     stages {
-        stage {'Test'} {
+        stage ('Test') {
             
             parallel{
-                stage{'Unit Tests'}{
+                stage('Unit Tests'){
                     steps{
                         sh './mvnw test -D testGroups=init'
                     }
                 }
-                stage{'Integration tests'}{
+                stage('Integration tests'){
                     when {
                         expression { return params.RUN_INTEGRATION_TESTS }
                     }
